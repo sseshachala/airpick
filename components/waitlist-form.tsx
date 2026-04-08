@@ -11,17 +11,26 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (!email) return;
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+
+    if (!endpoint || !email) {
+      setStatus("error");
+      return;
+    }
 
     setStatus("loading");
 
     try {
-      const res = await fetch("/api/waitlist", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({
+          email,
+          source: "airpick-waitlist"
+        })
       });
 
       if (!res.ok) {
@@ -76,7 +85,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
       )}
       {status === "error" && (
         <p className={dark ? "mt-3 text-sm text-red-300" : "mt-3 text-sm text-red-600"}>
-          Something went wrong. Please try again.
+          Please set your Formspree endpoint and try again.
         </p>
       )}
     </form>
