@@ -1,3 +1,5 @@
+import WaitlistForm from "../components/waitlist-form";
+
 const reasons = [
   {
     title: "Search fatigue is real",
@@ -34,9 +36,12 @@ export default function HomePage() {
       <header className="sticky top-0 z-20 border-b border-black/5 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="text-xl font-semibold tracking-tight">AirPick</div>
-          <button className="rounded-full border border-black px-4 py-2 text-sm transition hover:bg-black hover:text-white">
+          <a
+            href="#waitlist"
+            className="rounded-full border border-black px-4 py-2 text-sm transition hover:bg-black hover:text-white"
+          >
             Join waitlist
-          </button>
+          </a>
         </div>
       </header>
 
@@ -52,13 +57,8 @@ export default function HomePage() {
             <p className="mt-6 max-w-xl text-base leading-7 text-black/60 md:text-lg">
               AirPick helps you skip the noise. Instead of forcing you to sort through pages of fares, it highlights the best flight options with clear reasons you can trust.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <button className="rounded-full bg-black px-6 py-3 text-sm text-white transition hover:opacity-90">
-                Find my best flight
-              </button>
-              <button className="rounded-full border border-black/10 px-6 py-3 text-sm text-black transition hover:border-black/20 hover:bg-black/[0.03]">
-                See how it works
-              </button>
+            <div id="waitlist">
+              <WaitlistForm />
             </div>
             <div className="mt-8 flex flex-wrap gap-6 text-sm text-black/50">
               <span>Fewer tabs</span>
@@ -173,9 +173,7 @@ export default function HomePage() {
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/70 md:text-base">
             AirPick helps travelers move from comparison overload to a confident choice, without the usual friction of flight booking tools.
           </p>
-          <button className="mt-8 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition hover:opacity-90">
-            Join waitlist
-          </button>
+          <WaitlistForm dark />
         </div>
       </section>
 
